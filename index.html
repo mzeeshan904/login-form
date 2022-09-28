@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .form-container {
+            height: 600px;
+            background-color: rgb(29, 107, 133);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        input {
+            height: 30px;
+            width: 350px;
+            border-radius: 5px;
+            border: 0px;
+            font-size: 25px;
+        }
+
+        label {
+            font-size: 20px;
+            color: white;
+        }
+
+        button {
+            height: 30px;
+            width: 80px;
+            border-radius: 5px;
+            border: 0px;
+            color: white;
+            background-color: rgba(55, 57, 58, 0.9);
+            cursor: pointer;
+        }
+
+        p {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>LOGIN FORM</h1>
+        <form action="" id="login-form">
+            <br /><br />
+            <label>USER NAME</label><br />
+            <input type="text" id="user-name" />
+            <p id="user-error"></p>
+            <br /><br />
+            <label>PASSWORD</label><br />
+            <input type="password" id="pass-word" />
+            <p id="pass-error"></p>
+
+            <br /><br />
+            <label>CONFIRM PASSWORD</label><br />
+            <input type="password" id="confirm-password" />
+            <p id="confirm-error"></p>
+            <br /><br />
+            <button type="submit" id="btn">SUBMIT</button>
+        </form>
+    </div>
+
+    <script>
+
+            let userName = document.getElementById("user-name");
+            let passWord = document.getElementById("pass-word");
+            let confirmPassword = document.getElementById("confirm-password");
+            let submitButton = document.getElementById("btn");
+            let loginForm = document.getElementById("login-form");
+            
+
+            function checkUserName(){
+                if (userName.value.length == 0) {
+                document.getElementById("user-error").innerHTML = "Please enter username";
+                return false;
+                
+            } else if (userName.value.length < 3) {
+                document.getElementById("user-error").innerHTML = "Please enter appropriate username";
+                return false;
+            } else {
+                document.getElementById("user-error").innerHTML = "";
+                return true;
+                
+                
+            }
+        }
+            function checkPassword(){
+
+                if (passWord.value.length == 0){
+
+                    document.getElementById("pass-error").innerHTML = "Please enter password";
+                    return false;
+                }else{
+                    document.getElementById("pass-error").innerHTML = "";
+                    return true;
+                }
+
+            }
+
+            function checkConfirmPassword(){
+                if (confirmPassword.value == 0){
+                    document.getElementById("confirm-error").innerHTML = "Please enter confirm password";
+                    return false;
+                }else if (confirmPassword.value != passWord.value){
+                    document.getElementById("confirm-error").innerHTML = "Confirm password does not match";
+                    return false;
+                }else{
+                    document.getElementById("confirm-error").innerHTML = "";
+                    return true;
+                }
+
+            }
+
+            function checkForm (){
+
+                checkUserName();
+                checkPassword();
+                checkConfirmPassword();
+            }
+            function validateForm(event){
+
+                checkForm();
+                return true;
+            }
+
+         userName.addEventListener("keyup", checkUserName);
+         passWord.addEventListener("keyup", checkPassword);
+         confirmPassword.addEventListener("keyup", checkConfirmPassword);
+         submitButton.addEventListener("click", checkForm);
+         loginForm.addEventListener("submit", (event)=>{
+            event.preventDefault();
+            validateForm();
+            return true;
+            alert("form submitted");
+         });
+
+                
+            
+    
+
+
+    </script>
+</body>
+
+</html>
